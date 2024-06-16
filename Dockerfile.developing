@@ -1,0 +1,17 @@
+# TODO
+# ・マルチステージングビルドを使えば、
+#   初期構築レイヤーの延長線上に、開発用レイヤーを載せられる
+# ・rootでしか動かせない、、、Dockerfile上でのnode_modulesを後から権限変更したいなぁ
+
+FROM node:latest
+
+WORKDIR /workspace
+
+# imageサイズ縮小のため、aptキャッシュ削除
+# 常に最新のnpmコマンドを使用する
+# build-essentialはReactの案内に従った
+RUN apt-get update && \
+    apt-get install -y sudo build-essential && \
+    rm -rf /var/lib/apt/lists/* 
+## TODO: yarnの1.22.22をインストールする
+#    && npm install -g yarn@1.22.22 \

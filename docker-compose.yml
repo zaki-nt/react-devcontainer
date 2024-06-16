@@ -1,0 +1,14 @@
+version: "3"
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile.developing
+    volumes:
+      - .:/workspace:cached
+      - oss-react-node_modules:/workspace/react/node_modules
+    # コンテナ終了を防ぎ開発環境として動かし続けるため、フォアグラウンドでプロセスを動かす
+    tty: true
+
+volumes:
+  oss-react-node_modules:
